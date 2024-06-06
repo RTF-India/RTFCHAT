@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Other head tags -->
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" sizes="192x192" href="/icons/rfc.png">
+  <link rel="icon" sizes="512x512" href="/icons/rfc.png">
+  <link rel="apple-touch-icon" sizes="192x192" href="/icons/rfc.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RTFCHAT</title>
+</head>
+<body>
+<div id="op"> </div>
+<input type="text" id="textInput" placeholder="type something..">
+<button name="opp"onclick="checkInput()">OK</button>
+<button name="speak"onclick="startRecognition()"><i class="fa-solid fa-microphone"></i> </button>
+
+
+<style>
+input[id=textInput]{width:80%; placeholder:('hi'); height:45px;  text-align: center;  border-color: red; border-radius:10px; position: fixed; left:0px;bottom:1px;font-size:35px; color:gray; background:rgba(255,0,0,0.2);}
+button[name=opp]{width:18%; height:52px; border-radius:10px; position:fixed; background:rgba(192,192,192,0.2); border-color:black; color:black;bottom:1px;right:0px;}
+button[name=speak]{ color:red; border: 2px lavender ; box-shadow:10px 10px 10px gray;width:50px; height:50px;border-radius:50%; background-color: lavender ; font-size:30px;} button[name=speak]:hover{color:green}
+</style>
+<audio src="/storage/emulated/0/Download/Desh Mere_320(PagalWorld.com.pe).mp3" id="play">
+<script type="text/javascript">
+function checkInput(){
+var userInput = document.getElementById('textInput').value.trim().toLowerCase();
+if(userInput === 'ravi' || userInput ==='hi' || userInput ==='hello' || userInput ==='🙋'){
+document.getElementById('op').innerHTML ="<h1><p style='color:green'>hi tell me what can I do";
+document.getElementById('play').play();
+}
+if(userInput === 'error'){
+document.write('there was no error');
+}
+if(userInput === 'who is your maker'){
+alert('mr ravikant is my maker');
+}
+if(userInput === 'what,s your name'){
+alert(' I am rtf ai ');
+}
+if(userInput === ''){
+alert('type something');
+}
+if(userInput ==='what can you do'){
+alert('i can give you some information ');
+}
+if(userInput ==='help'){
+document.getElementById('op').innerHTML ="<h1> <p style='color:green'>tell me what help can I do ";
+}
+if(userInput ==='open mcpe' || userInput ==='open minecraft'){
+window.open('minecraft://','_blank');
+}
+if(userInput ==='open ff' || userInput ==='open free fire'){
+window.open('freefire://','_blank');
+}
+}
+</script>
+<script>
+  if ('webkitSpeechRecognition' in window) {
+    // Web Speech API is supported
+    const recognition = new webkitSpeechRecognition();
+    recognition.continuous = false; // Set to true for continuous recognition
+    recognition.interimResults = true; // Get interim results as the user speaks
+
+    recognition.onresult = (event) => {
+      const transcript = event.results[0][0].transcript;
+      document.getElementById('textInput').value = transcript;
+    };
+
+    recognition.onerror = (event) => {
+      console.error('Speech recognition error:', event.error);
+    };
+
+    // Start recognition when the user clicks the button
+    function startRecognition() {
+      recognition.start();
+    }
+  } else {
+    console.error('Web Speech API is not supported in this browser.');
+  }
+</script>
+
+</body>
+</html>
